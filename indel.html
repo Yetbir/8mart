@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>8 Наурыз Құттықтау</title>
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    overflow-x:hidden;
+}
+
+/* 1 бет */
+#page1{
+    background: linear-gradient(135deg,#ff9ecf,#ffd6ec);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.card{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    width:400px;
+}
+button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:#ff4fa3;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* 2 бет */
+#page2{
+    display:none;
+    background:#ffd6ec;
+    min-height:100vh;
+    padding-top:40px;
+    position:relative;
+}
+
+/* Фото галерея */
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
+}
+.gallery img{
+    width:150px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+}
+.gallery img:hover{
+    transform: scale(1.1);
+}
+
+/* Жұлдыздар мен гүлдер анимация */
+.star, .flower{
+    position:absolute;
+    font-size:24px;
+    animation:float 5s linear infinite;
+}
+.star{ color: gold; }
+.flower{ color: #ff69b4; }
+
+@keyframes float{
+    0%{transform:translateY(0) rotate(0deg); opacity:1;}
+    100%{transform:translateY(-300px) rotate(360deg); opacity:0;}
+}
+
+/* Мәтін */
+#loveText{
+    font-size:24px;
+    color:#ff3f9b;
+    margin-top:20px;
+}
+</style>
+<script>
+let music, animContainer;
+
+function openPage2(){
+    document.getElementById("page1").style.display="none";
+    document.getElementById("page2").style.display="block";
+    createStarsAndFlowers();
+    playMusic();
+}
+
+// Жұлдыздар мен гүлдер жасау
+function createStarsAndFlowers(){
+    for(let i=0;i<15;i++){
+        let star = document.createElement("div");
+        star.className="star";
+        star.style.left = Math.random()*90 + "%";
+        star.style.fontSize = (15+Math.random()*20)+"px";
+        document.getElementById("page2").appendChild(star);
+        star.innerHTML = "⭐";
+    }
+    for(let i=0;i<15;i++){
+        let flower = document.createElement("div");
+        flower.className="flower";
+        flower.style.left = Math.random()*90 + "%";
+        flower.style.fontSize = (15+Math.random()*15)+"px";
+        document.getElementById("page2").appendChild(flower);
+        flower.innerHTML = "🌸";
+    }
+}
+
+function playMusic(){
+    music = document.createElement("iframe");
+    music.width = 0;
+    music.height = 0;
+    music.src = "https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g";
+    music.allow = "autoplay";
+    document.body.appendChild(music);
+}
+
+function backPage(){
+    document.getElementById("page2").style.display="none";
+    document.getElementById("page1").style.display="flex";
+    if(music){
+        document.body.removeChild(music);
+        music = null;
+    }
+}
+</script>
+</head>
+<body>
+
+<!-- 1 бет -->
+<div id="page1">
+<div class="card">
+<h1>🌸 8 Наурыз Құтты Болсын 🌸</h1>
+<h2>Арайлым!</h2>
+<p>
+Сені 8 наурыз мерекесімен құттықтаймын!  
+Әрқашан күліп жүр, бақытты бол! 💐
+</p>
+<button onclick="openPage2()">Саған кішкентай сыйлық 🎁</button>
+</div>
+</div>
+
+<!-- 2 бет -->
+<div id="page2">
+<h1>Арайлым 💖</h1>
+<p id="loveText">Сен өте ерекше жансың ✨</p>
+<div class="gallery">
+<video width="500" controls>
+  <source src="1234.mp4" type="video/mp4">
+  Сіздің браузер видео көрсетпейді
+</video>
+</div>
+<br>
+<button onclick="backPage()">Артқа қайту</button>
+</div>
+</body>
+</html>
