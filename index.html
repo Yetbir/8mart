@@ -13,15 +13,23 @@
         button:hover { background: #e63e8d; }
 
         #page2 { display: none; min-height: 100vh; padding-top: 20px; position: relative; }
-        .gallery { display: flex; justify-content: center; margin-top: 20px; padding: 0 10px; }
-        video { width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); background-color: black; }
+        .gallery { display: flex; justify-content: center; margin-top: 15px; padding: 0 10px; }
+        
+        /* Видео өлшемін осы жерден өзгерте аласыз */
+        video { 
+            width: 80%;           /* Экранның 80%-ын алады */
+            max-width: 300px;      /* Ең үлкен өлшемі 300 пиксельден аспайды */
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            background-color: black; 
+        }
         
         .star, .flower { position: absolute; font-size: 20px; animation: float 5s linear infinite; pointer-events: none; z-index: 1; }
         .star { color: gold; }
         .flower { color: #ff69b4; }
         @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
         
-        #loveText { font-size: 20px; color: #ff3f9b; margin: 20px; font-weight: bold; }
+        #loveText { font-size: 20px; color: #ff3f9b; margin: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
