@@ -8,19 +8,19 @@
         body { margin: 0; font-family: 'Arial', sans-serif; text-align: center; overflow-x: hidden; background: #ffd6ec; }
         
         #page1 { background: linear-gradient(135deg,#ff9ecf,#ffd6ec); height: 100vh; display: flex; justify-content: center; align-items: center; }
-        
-        /* Телефонда карточка толық экранды иеленуі үшін */
         .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 85%; max-width: 400px; }
-        
-        button { margin-top: 20px; padding: 15px 30px; border: none; border-radius: 15px; background: #ff4fa3; color: white; font-size: 16px; cursor: pointer; width: 100%; }
+        button { margin-top: 20px; padding: 15px 30px; border: none; border-radius: 15px; background: #ff4fa3; color: white; font-size: 16px; cursor: pointer; width: 100%; transition: 0.3s; }
+        button:hover { background: #e63e8d; }
 
         #page2 { display: none; min-height: 100vh; padding-top: 20px; position: relative; }
-        
-        /* Видео контейнері телефонда толық көрінуі үшін */
         .gallery { display: flex; justify-content: center; margin-top: 20px; padding: 0 10px; }
-        video { width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        video { width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); background-color: black; }
         
-        .star, .flower { position: absolute; font-size: 20px; pointer-events: none; }
+        .star, .flower { position: absolute; font-size: 20px; animation: float 5s linear infinite; pointer-events: none; z-index: 1; }
+        .star { color: gold; }
+        .flower { color: #ff69b4; }
+        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+        
         #loveText { font-size: 20px; color: #ff3f9b; margin: 20px; font-weight: bold; }
     </style>
 </head>
@@ -42,13 +42,9 @@
     <div class="gallery">
         <video id="myVideo" controls playsinline>
             <source src="123456.mp4" type="video/mp4">
-            Браузеріңіз қолдамайды.
+            Браузеріңіз бұл видеоны қолдамайды.
         </video>
     </div>
-    
-    <audio id="bgMusic" loop>
-        <source src="123456 (audio-extractor.net).mp3" type="audio/mpeg">
-    </audio>
     
     <br><br>
     <button onclick="backPage()" style="width: 200px;">Артқа қайту</button>
@@ -60,18 +56,38 @@
     function openPage2() {
         document.getElementById("page1").style.display = "none";
         document.getElementById("page2").style.display = "block";
+        
         const video = document.getElementById("myVideo");
-        const music = document.getElementById("bgMusic");
+        video.currentTime = 0; 
         video.play(); 
-        music.play();
+        
+        createStarsAndFlowers();
     }
 
     function backPage() {
         const video = document.getElementById("myVideo");
-        const music = document.getElementById("bgMusic");
-        video.pause(); music.pause(); music.currentTime = 0;
+        video.pause(); 
         document.getElementById("page2").style.display = "none";
         document.getElementById("page1").style.display = "flex";
+    }
+
+    function createStarsAndFlowers() {
+        const page2 = document.getElementById("page2");
+        for(let i=0; i<15; i++) {
+            let star = document.createElement("div");
+            star.className = "star";
+            star.style.left = Math.random()*90 + "%";
+            star.style.animationDelay = Math.random()*5 + "s";
+            star.innerHTML = "⭐";
+            page2.appendChild(star);
+            
+            let flower = document.createElement("div");
+            flower.className = "flower";
+            flower.style.left = Math.random()*90 + "%";
+            star.style.animationDelay = Math.random()*5 + "s";
+            flower.innerHTML = "🌸";
+            page2.appendChild(flower);
+        }
     }
 </script>
 
